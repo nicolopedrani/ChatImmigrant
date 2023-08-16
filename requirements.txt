@@ -13,3 +13,5 @@ embedchain
 requests
 deepl
 openai
+pysqlite3-binary
+chromadb
