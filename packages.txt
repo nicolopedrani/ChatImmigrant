@@ -1,0 +1,3 @@
+openssl 
+unixodbc
+sqlite3

@@ -1,0 +1,15 @@
+pyodbc
+azure-storage-blob
+azure-core
+sqlalchemy
+openpyxl
+streamlit
+ipykernel
+watchdog
+streamlit-authenticator
+numpy
+pandas
+embedchain
+requests
+deepl
+openai

@@ -1,0 +1,65 @@
+name: chat_immigrant
+channels:
+  - defaults
+  - anaconda
+  - conda-forge
+dependencies:
+  - python<=3.10
+  # - ffmpeg
+  # - tesseract
+  - openssl
+  - unixodbc
+  # - zbar
+  - pip
+  - pip: 
+    # - geopy
+    - pyodbc
+    # - google-search-results 
+    # - gpt4all
+    # - llama-cpp-python 
+    # - unstructured
+    # - unstructured-inference
+    # - pytesseract
+    # - openai-whisper
+    # - solara
+    # - transformers
+    - azure-storage-blob
+    - azure-core
+    - sqlalchemy
+    - openpyxl
+    - streamlit
+    # - streamlit-chat
+    # - streamlit-folium
+    # - sentence-transformers 
+    # - wikipedia 
+    # - chromadb 
+    # - langchain
+    # - docx2txt 
+    # - faiss-cpu  
+    # - pydub 
+    # - python-dotenv  
+    # - setuptools 
+    # - tzdata  
+    # - watchfiles 
+    # - websockets  
+    - openai 
+    - ipykernel
+    # - plotly
+    # - pypdf2
+    - watchdog
+    # - huggingface_hub
+    # - text-generation
+    # - googletrans==4.0.0-rc1
+    # - pillow-heif
+    # - stability-sdk
+    # - python-pptx
+    - streamlit-authenticator
+    # - opencv-python
+    # - streamlit-qrcode-scanner
+    - numpy
+    - pandas
+    # - pyzbar
+    # - eansearch
+    - embedchain
+    - requests
+    - deepl
