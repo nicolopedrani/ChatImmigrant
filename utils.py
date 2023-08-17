@@ -34,6 +34,7 @@ def set_keys():
      os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
 
 # @st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
+@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
 def get_credentials():
 
      container_name = "chatimmigrant"
@@ -49,6 +50,7 @@ def get_credentials():
      with open('config.yaml') as file:
           config = yaml.load(file, Loader=SafeLoader)
 
+     # questo setta i session state di logout name username authentication_status
      authenticator = stauth.Authenticate(
      config['credentials'],
      config['cookie']['name'],

@@ -16,15 +16,14 @@ st.set_page_config(
 from utils import *
 
 if 'messages' not in st.session_state:
-    # st.session_state.setdefault("logout", True)
-    # st.session_state.setdefault("name", None)
-    # st.session_state.setdefault("username", None)
-    # st.session_state.setdefault("authentication_status", None)
     st.session_state.setdefault("messages", [])
 
 authenticator, config = get_credentials()
 
 if st.session_state.logout:
+
+    # se fai logout cancello i messaggi
+    st.session_state.messages = []
 
     cols = st.columns([1,2,1])
 
