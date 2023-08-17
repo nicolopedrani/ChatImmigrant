@@ -83,7 +83,7 @@ if st.session_state.logout:
             try:
                 username_forgot_pw, email_forgot_password, random_password = authenticator.forgot_password('Forgot password')
                 if username_forgot_pw:
-                    send_email(email_forgot_password, random_password)
+                    send_email(receiver_email=email_forgot_password, random_password=random_password)
                     st.success('New password sent securely')
                     # Random password to be transferred to user securely
                 else:
@@ -95,7 +95,7 @@ if st.session_state.logout:
             try:
                 username_forgot_username, email_forgot_username = authenticator.forgot_username('Forgot username')
                 if username_forgot_username:
-                    send_email(email_forgot_username)
+                    send_email(receiver_email=email_forgot_username, username=username_forgot_username)
                     st.success('Username sent securely')
                     # Username to be transferred to user securely
                 else:

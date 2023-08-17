@@ -39,7 +39,7 @@ def load_app():
 
      return bot
 
-def send_email(receiver_email, random_password=None):
+def send_email(receiver_email, random_password=None, username=None):
 
      import smtplib
 
@@ -65,7 +65,7 @@ def send_email(receiver_email, random_password=None):
      else:
           receiver_email = receiver_email
           subject = "Forgot Username"
-          body = f"This is your username, username {random_password}"
+          body = f"This is your username, username {username}"
           message = f"Subject: {subject}\n\n{body}"
 
      # Send the email
