@@ -15,8 +15,12 @@ st.set_page_config(
 
 from utils import *
 
-st.session_state.setdefault("logout", True)
-st.session_state.setdefault("messages", [])
+if 'logout' not in st.session_state:
+    st.session_state.setdefault("logout", True)
+    st.session_state.setdefault("name", None)
+    st.session_state.setdefault("username", None)
+    st.session_state.setdefault("authentication_status", None)
+    st.session_state.setdefault("messages", [])
 
 set_keys()
 
