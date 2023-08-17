@@ -22,7 +22,21 @@ st.session_state.setdefault("authentication_status", False)
 st.session_state.setdefault("username", "")
 st.session_state.setdefault("logout", True)
 
-authenticator, config = get_credentials()
+# download config file
+get_credentials()
+
+# open file
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+# questo setta i session state di logout name username authentication_status
+authenticator = stauth.Authenticate(
+config['credentials'],
+config['cookie']['name'],
+config['cookie']['key'],
+config['cookie']['expiry_days'],
+config['preauthorized']
+)
 
 if st.session_state.logout:
 
