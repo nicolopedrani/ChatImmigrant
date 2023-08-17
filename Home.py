@@ -79,7 +79,7 @@ if st.session_state.logout:
             yaml.dump(config, file, default_flow_style=False)
 
         # upload modified blob
-        upload_config()
+        # upload_config()
 
 else:
 
