@@ -2,9 +2,9 @@ import streamlit as st
 from langchain.schema import messages_to_dict
 
 st.set_page_config(
-     page_title='Bar Code Reader',
+     page_title='QA Immigration',
      layout = 'wide',
-     page_icon = "🔎",
+     page_icon = "🇪🇺",
      # initial_sidebar_state = 'collapsed',
      menu_items = {
           'About': 'https://www.linkedin.com/in/nicolo-pedrani/',
@@ -109,6 +109,8 @@ else:
             
 
     bot = load_bot()
+
+    st.title("Chat About Immigration policies")
 
     for message in st.session_state.messages:
         if message["role"]=='user':
