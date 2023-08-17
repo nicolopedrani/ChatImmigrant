@@ -85,9 +85,6 @@ if st.session_state.logout:
                 if username_forgot_pw:
                     send_email(email_forgot_password, random_password)
                     st.success('New password sent securely')
-                    st.write(email_forgot_password)
-                    st.write(random_password)
-
                     # Random password to be transferred to user securely
                 else:
                     st.error('Username not found')
@@ -98,6 +95,7 @@ if st.session_state.logout:
             try:
                 username_forgot_username, email_forgot_username = authenticator.forgot_username('Forgot username')
                 if username_forgot_username:
+                    send_email(email_forgot_username)
                     st.success('Username sent securely')
                     # Username to be transferred to user securely
                 else:

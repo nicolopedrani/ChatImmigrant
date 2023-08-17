@@ -32,14 +32,15 @@ def load_app():
      bot = App()
 
      # Embed online resources
-     bot.add("web_page", "https://en.wikipedia.org/wiki/Elon_Musk")
-     bot.add("web_page", "https://tesla.com/elon-musk")
-     bot.add("youtube_video", "https://www.youtube.com/watch?v=MxZpaJK74Y4")
-# naval_chat_bot.add("pdf_file", "https://navalmanack.s3.amazonaws.com/Eric-Jorgenson_The-Almanack-of-Naval-Ravikant_Final.pdf")
+     bot.add("web_page", "https://european-union.europa.eu/live-work-study/immigration-eu_en")
+     bot.add("web_page", "https://immigration-portal.ec.europa.eu/general-information/what-category-do-i-fit_en")
+     bot.add("pdf_file", "https://www.europarl.europa.eu/erpl-app-public/factsheets/pdf/en/FTU_4.2.3.pdf")
+     bot.add("youtube_video", "https://www.youtube.com/watch?v=1rFcAofSXzk")
 
      return bot
 
-def send_email(receiver_email, random_password):
+def send_email(receiver_email, random_password=None):
+
      import smtplib
 
      # Set up the SMTP server
@@ -56,10 +57,16 @@ def send_email(receiver_email, random_password):
      server.login(sender_email, password)
 
      # Compose the email
-     receiver_email = receiver_email
-     subject = "Forgot Password"
-     body = f"That is the new password!, password {random_password}"
-     message = f"Subject: {subject}\n\n{body}"
+     if random_password:
+          receiver_email = receiver_email
+          subject = "Forgot Password"
+          body = f"That is the new password!, password {random_password}"
+          message = f"Subject: {subject}\n\n{body}"
+     else:
+          receiver_email = receiver_email
+          subject = "Forgot Username"
+          body = f"This is your username, username {random_password}"
+          message = f"Subject: {subject}\n\n{body}"
 
      # Send the email
      server.sendmail(sender_email, receiver_email, message)
