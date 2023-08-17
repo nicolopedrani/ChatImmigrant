@@ -17,9 +17,9 @@ from utils import *
 
 # if 'messages' not in st.session_state:
 st.session_state.setdefault("messages", [])
-st.session_state.setdefault("name", None)
-st.session_state.setdefault("authentication_status", None)
-st.session_state.setdefault("username", None)
+st.session_state.setdefault("name", "")
+st.session_state.setdefault("authentication_status", False)
+st.session_state.setdefault("username", "")
 st.session_state.setdefault("logout", True)
 
 authenticator, config = get_credentials()
