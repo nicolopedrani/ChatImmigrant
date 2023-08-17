@@ -15,14 +15,12 @@ st.set_page_config(
 
 from utils import *
 
-if 'logout' not in st.session_state:
-    st.session_state.setdefault("logout", True)
-    st.session_state.setdefault("name", None)
-    st.session_state.setdefault("username", None)
-    st.session_state.setdefault("authentication_status", None)
+if 'messages' not in st.session_state:
+    # st.session_state.setdefault("logout", True)
+    # st.session_state.setdefault("name", None)
+    # st.session_state.setdefault("username", None)
+    # st.session_state.setdefault("authentication_status", None)
     st.session_state.setdefault("messages", [])
-
-set_keys()
 
 authenticator, config = get_credentials()
 
@@ -115,7 +113,7 @@ else:
             else:
                 st.info("you must be logged in to take this action")
             
-
+    set_keys()
     bot = load_bot()
 
     st.title("Chat About Immigration policies")
