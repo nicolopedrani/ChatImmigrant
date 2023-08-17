@@ -30,9 +30,6 @@ def get_translator():
 @st.cache_resource(show_spinner=False)
 def set_keys():
 
-     st.session_state.setdefault("logout", True)
-     st.session_state.setdefault("messages", [])
-
      os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
      os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
 

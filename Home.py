@@ -15,6 +15,9 @@ st.set_page_config(
 
 from utils import *
 
+st.session_state.setdefault("logout", True)
+st.session_state.setdefault("messages", [])
+
 set_keys()
 
 authenticator, config = get_credentials()
