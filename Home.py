@@ -14,30 +14,10 @@ st.set_page_config(
 )
 
 from utils import *
-import streamlit_authenticator as stauth
-import os
-# login #
-import yaml
-from yaml.loader import SafeLoader
 
-# hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
-# st.write(hashed_passwords)
-# queste poi vanno messe all'interno del file al posto delle password scritte
+set_keys()
 
-st.session_state.setdefault("logout", True)
-st.session_state.setdefault("messages", [])
-
-
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-    config['preauthorized']
-)
+authenticator, config = get_credentials()
 
 if st.session_state.logout:
 
@@ -69,15 +49,6 @@ if st.session_state.logout:
                 st.error(e)
 
         with tab3:
-            st.write("Reset Password")
-            if st.session_state["authentication_status"]:
-                try:
-                    if authenticator.reset_password(username, 'Reset password'):
-                        st.success('Password modified successfully')
-                except Exception as e:
-                    st.error(e)
-            else:
-                st.info("you must be logged in to take this action")
 
             st.write("Forgot Password")
             try:
@@ -103,24 +74,41 @@ if st.session_state.logout:
             except Exception as e:
                 st.error(e)
 
+        # update credential file, on server side
+        with open('config.yaml', 'w') as file:
+            yaml.dump(config, file, default_flow_style=False)
+
+        # upload modified blob
+        upload_config()
+
+else:
+
+    authenticator.logout('Logout', 'sidebar', key='unique_key')
+
+    with st.sidebar:
+        with st.expander("Advanced Options"):
             st.write("Update User Details")
             if st.session_state["authentication_status"]:
                 try:
-                    if authenticator.update_user_details(username, 'Update user details'):
+                    if authenticator.update_user_details(st.session_state["name"], 'Update user details'):
                         st.success('Entries updated successfully')
                 except Exception as e:
                     st.error(e)
             else:
                 st.info("you must be logged in to take this action")
 
-        # update credential file
-        with open('config.yaml', 'w') as file:
-            yaml.dump(config, file, default_flow_style=False)
+            st.write("Reset Password")
+            if st.session_state["authentication_status"]:
+                try:
+                    if authenticator.reset_password(st.session_state["name"], 'Reset password'):
+                        st.success('Password modified successfully')
+                except Exception as e:
+                    st.error(e)
+            else:
+                st.info("you must be logged in to take this action")
+            
 
-else:
-    authenticator.logout('Logout', 'sidebar', key='unique_key')
-
-    bot = load_app()
+    bot = load_bot()
 
     for message in st.session_state.messages:
         if message["role"]=='user':

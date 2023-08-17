@@ -2,17 +2,23 @@ import streamlit as st
 import deepl
 import os
 from embedchain import App
-from embedchain import OpenSourceApp
-from embedchain import Llama2App
+# from embedchain import OpenSourceApp
+# from embedchain import Llama2App
 
+import streamlit_authenticator as stauth
+import yaml
+from yaml.loader import SafeLoader
 
 # import pandas as pd
 from streamlit.logger import get_logger
 logger = get_logger(__name__)
 
+# azure blob storage
+from azure.storage.blob import ContainerClient
+
 @st.cache_resource()
 def get_translator():
-     auth_key = "2189c316-4cf5-225f-4602-ab2ee1dab2f8:fx"  # Replace with your key
+     auth_key = st.secrets["deepl_key"]  # Replace with your key
      translator = deepl.Translator(auth_key)
      return translator
 
@@ -20,12 +26,53 @@ def get_translator():
 # result = translator.translate_text("Hello, world!", target_lang="FR")
 # print(result.text)  # "Bonjour, le monde !"
 
-# Create a bot instance
-os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
-os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
+
+@st.cache_resource(show_spinner=False)
+def set_keys():
+
+     st.session_state.setdefault("logout", True)
+     st.session_state.setdefault("messages", [])
+
+     os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
+     os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
+
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
+def get_credentials():
+
+     container_name = "chatimmigrant"
+
+     container = ContainerClient.from_connection_string(st.secrets["connection_string"], container_name=container_name)
+     blob = container.get_blob_client(blob='config.yaml')
+     
+     with open(file=os.path.join(r'./', 'config.yaml'), mode="wb") as sample_blob:
+        download_stream = blob.download_blob()
+        sample_blob.write(download_stream.readall())
+
+     # open file
+     with open('config.yaml') as file:
+          config = yaml.load(file, Loader=SafeLoader)
+
+     authenticator = stauth.Authenticate(
+     config['credentials'],
+     config['cookie']['name'],
+     config['cookie']['key'],
+     config['cookie']['expiry_days'],
+     config['preauthorized']
+     )
+
+     return authenticator, config
+
+def upload_config():
+
+     container_name = "chatimmigrant"
+     container = ContainerClient.from_connection_string(st.secrets["connection_string"], container_name=container_name)
+
+     with open(file=os.path.join('./', 'config.yaml'), mode="rb") as data:
+          blob_client = container.upload_blob(name="config.yaml", data=data, overwrite=True)
+
 
 @st.cache_resource()
-def load_app():
+def load_bot():
     
 #     bot = OpenSourceApp() # downloads models
      # bot = Llama2App()

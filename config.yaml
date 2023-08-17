@@ -8,6 +8,10 @@ credentials:
       email: jsmith@gmail.com
       name: John Smith
       password: $2b$12$PXgjKRKUcBctID5ulK5BMe1aXJFPHPH0YNXpyC95XwVRVBHCsc3hW
+    nico:
+      email: nicolo.pedrani@gmail.com
+      name: nico
+      password: $2b$12$PhnRi1n9KZxJXMsVD/UwxuhHSP/Xbh34PZF/fWG1QeJ1807BYXGIG
     nicopepe:
       email: nicopepe06@gmail.com
       name: nico
