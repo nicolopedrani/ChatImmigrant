@@ -91,8 +91,8 @@ if st.session_state.logout:
 
 else:
 
-    authenticator.logout('Logout', 'sidebar')
-    # authenticator.logout('Logout', 'sidebar', key='unique_key')
+    # authenticator.logout('Logout', 'sidebar')
+    authenticator.logout('Logout', 'sidebar', key='unique_key')
 
     with st.sidebar:
         with st.expander("Advanced Options"):
