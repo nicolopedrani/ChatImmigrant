@@ -34,7 +34,7 @@ def set_keys():
      os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
 
 # @st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
-@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
+# @st.cache_data(show_spinner=False, experimental_allow_widgets=True)
 def get_credentials():
 
      container_name = "chatimmigrant"
