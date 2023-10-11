@@ -5,6 +5,8 @@ from embedchain import App
 from embedchain.llm.openai import OpenAILlm
 from embedchain.config import LlmConfig
 
+from embedchain.vectordb.elasticsearch import ElasticsearchDB
+
 # from embedchain import OpenSourceApp
 # from embedchain import Llama2App
 
@@ -32,7 +34,8 @@ def load_bot():
      # bot = OpenSourceApp() # downloads models
      # bot = Llama2App()
      # bot = App()
-     bot = App(llm=OpenAILlm(), llm_config=LlmConfig(model="gpt-4",temperature=0))
+     bot = App(llm=OpenAILlm(), llm_config=LlmConfig(model="gpt-4",temperature=0))#, db=ElasticsearchDB())
+     # bot = App(llm=OpenAILlm(), llm_config=LlmConfig(model="gpt-4",temperature=0), db=ElasticsearchDB())
      
      # Embed Online Resources
      bot.add("https://en.wikipedia.org/wiki/Immigration_to_Europe")
