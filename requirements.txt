@@ -1,6 +1,6 @@
 pyodbc
-azure-storage-blob
-azure-core
+# azure-storage-blob
+# azure-core
 sqlalchemy
 openpyxl
 streamlit

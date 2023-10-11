@@ -6,15 +6,10 @@ from embedchain import App
 # from embedchain import Llama2App
 
 import streamlit_authenticator as stauth
-import yaml
-from yaml.loader import SafeLoader
 
 # import pandas as pd
 from streamlit.logger import get_logger
 logger = get_logger(__name__)
-
-# azure blob storage
-from azure.storage.blob import ContainerClient
 
 @st.cache_resource()
 def get_translator():
@@ -26,38 +21,16 @@ def get_translator():
 # result = translator.translate_text("Hello, world!", target_lang="FR")
 # print(result.text)  # "Bonjour, le monde !"
 
-
 @st.cache_resource(show_spinner=False)
 def set_keys():
 
      os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
-     os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
-
-@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
-def get_credentials():
-
-     container_name = "chatimmigrant"
-
-     container = ContainerClient.from_connection_string(st.secrets["connection_string"], container_name=container_name)
-     blob = container.get_blob_client(blob='config.yaml')
-     
-     with open(file=os.path.join(r'./', 'config.yaml'), mode="wb") as sample_blob:
-        download_stream = blob.download_blob()
-        sample_blob.write(download_stream.readall())
-
-def upload_config():
-
-     container_name = "chatimmigrant"
-     container = ContainerClient.from_connection_string(st.secrets["connection_string"], container_name=container_name)
-
-     with open(file=os.path.join('./', 'config.yaml'), mode="rb") as data:
-          blob_client = container.upload_blob(name="config.yaml", data=data, overwrite=True)
-
+     # os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
 
 @st.cache_resource()
 def load_bot():
     
-#     bot = OpenSourceApp() # downloads models
+     # bot = OpenSourceApp() # downloads models
      # bot = Llama2App()
      bot = App()
 
@@ -77,7 +50,7 @@ def send_email(receiver_email, random_password=None, username=None):
      smtp_server = "smtp.gmail.com"
      port = 587
      sender_email = "nicopepe06@gmail.com"
-     password = "psysalapteqxkmtw"
+     password = st.secrets["gmail_password"]
 
      # Create a secure SSL/TLS connection
      server = smtplib.SMTP(smtp_server, port)
