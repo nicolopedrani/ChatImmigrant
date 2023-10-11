@@ -4,7 +4,7 @@ channels:
   - anaconda
   - conda-forge
 dependencies:
-  - python<=3.10
+  - python==3.10
   # - ffmpeg
   # - tesseract
   - openssl
@@ -23,8 +23,8 @@ dependencies:
     # - openai-whisper
     # - solara
     # - transformers
-    - azure-storage-blob
-    - azure-core
+    # - azure-storage-blob
+    # - azure-core
     - sqlalchemy
     - openpyxl
     - streamlit
@@ -61,5 +61,6 @@ dependencies:
     # - pyzbar
     # - eansearch
     - embedchain
+    # - pysqlite3-binary
     - requests
     - deepl

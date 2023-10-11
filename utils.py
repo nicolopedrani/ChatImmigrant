@@ -2,6 +2,9 @@ import streamlit as st
 import deepl
 import os
 from embedchain import App
+from embedchain.llm.openai import OpenAILlm
+from embedchain.config import LlmConfig
+
 # from embedchain import OpenSourceApp
 # from embedchain import Llama2App
 
@@ -17,10 +20,6 @@ def get_translator():
      translator = deepl.Translator(auth_key)
      return translator
 
-# sample usage
-# result = translator.translate_text("Hello, world!", target_lang="FR")
-# print(result.text)  # "Bonjour, le monde !"
-
 @st.cache_resource(show_spinner=False)
 def set_keys():
 
@@ -32,13 +31,17 @@ def load_bot():
     
      # bot = OpenSourceApp() # downloads models
      # bot = Llama2App()
-     bot = App()
+     # bot = App()
+     bot = App(llm=OpenAILlm(), llm_config=LlmConfig(model="gpt-4",temperature=0))
+     
+     # Embed Online Resources
+     bot.add("https://en.wikipedia.org/wiki/Immigration_to_Europe")
+     bot.add("https://www.europarl.europa.eu/factsheets/en/sheet/152/immigration-policy")
+     bot.add("https://www.youtube.com/watch?v=uQqmRkhuMWU")
+     bot.add("https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:52015DC0240")
+     bot.add("https://www.europarl.europa.eu/news/en/headlines/society/20170629STO78629/the-eu-response-to-migration-and-asylum")
+     bot.add("https://www.europarl.europa.eu/news/en/headlines/world/20200624STO81906/exploring-migration-causes-why-people-migrate")
 
-     # Embed online resources
-     bot.add("web_page", "https://european-union.europa.eu/live-work-study/immigration-eu_en")
-     bot.add("web_page", "https://immigration-portal.ec.europa.eu/general-information/what-category-do-i-fit_en")
-     bot.add("pdf_file", "https://www.europarl.europa.eu/erpl-app-public/factsheets/pdf/en/FTU_4.2.3.pdf")
-     bot.add("youtube_video", "https://www.youtube.com/watch?v=1rFcAofSXzk")
 
      return bot
 
