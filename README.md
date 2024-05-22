@@ -1,10 +1,8 @@
 # Document Chatter  
 
-Bar Code reader to help local vendors  
-First login cookies
+Q&A Chatbot about european immigration policies 
 
-# password jsmith --> ABC
-rbriggs --> def
-nicopepe --> ciao
+## To do:
+add login options
 
 

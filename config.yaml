@@ -1,21 +1,12 @@
-cookie:
-  expiry_days: 30
-  key: some_signature_key
-  name: some_cookie_name
-credentials:
-  usernames:
-    jsmith:
-      email: jsmith@gmail.com
-      name: John Smith
-      password: $2b$12$PXgjKRKUcBctID5ulK5BMe1aXJFPHPH0YNXpyC95XwVRVBHCsc3hW
-    nicopepe:
-      email: nicopepe06@gmail.com
-      name: nico
-      password: $2b$12$uYU2gitWgA6TxruiNMe/xeGFrIaMpjZSNU8xqqmfAI2GbnlKC49mC
-    rbriggs:
-      email: rbriggs@gmail.com
-      name: Rebecca Briggs
-      password: $2b$12$mJFIVgou7QtiLY3LYg6Le.HsyRq9HhCNHJwzBeyzY/3knN7sSq/C6
-preauthorized:
-  emails:
-  - nicolo.pedrani@gmail.com
+llm:
+  provider: openai
+  config:
+    model: 'gpt-3.5-turbo'
+    temperature: 0.5
+    max_tokens: 1000
+    top_p: 1
+    stream: false
+embedder:
+  provider: openai
+  config:
+    model: 'text-embedding-3-small'

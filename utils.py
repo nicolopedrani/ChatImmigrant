@@ -2,15 +2,6 @@ import streamlit as st
 import deepl
 import os
 from embedchain import App
-from embedchain.llm.openai import OpenAILlm
-from embedchain.config import LlmConfig
-
-from embedchain.vectordb.elasticsearch import ElasticsearchDB
-
-# from embedchain import OpenSourceApp
-# from embedchain import Llama2App
-
-import streamlit_authenticator as stauth
 
 # import pandas as pd
 from streamlit.logger import get_logger
@@ -24,18 +15,13 @@ def get_translator():
 
 @st.cache_resource(show_spinner=False)
 def set_keys():
-
      os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
-     # os.environ['REPLICATE_API_TOKEN'] = st.secrets["replicate_key"]
 
 @st.cache_resource()
 def load_bot():
-    
-     # bot = OpenSourceApp() # downloads models
-     # bot = Llama2App()
-     # bot = App()
-     bot = App(llm=OpenAILlm(), llm_config=LlmConfig(model="gpt-4",temperature=0))#, db=ElasticsearchDB())
-     # bot = App(llm=OpenAILlm(), llm_config=LlmConfig(model="gpt-4",temperature=0), db=ElasticsearchDB())
+
+     # load llm configuration from config.yaml file
+     bot = App.from_config(config_path="config.yaml")
      
      # Embed Online Resources
      bot.add("https://en.wikipedia.org/wiki/Immigration_to_Europe")

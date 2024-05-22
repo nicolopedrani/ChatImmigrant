@@ -1,10 +1,9 @@
 import streamlit as st
-# from langchain.schema import messages_to_dict
 
 st.set_page_config(
      page_title='European QA chatbot for Immigration',
      layout = 'wide',
-     page_icon = "🇪🇺",
+     page_icon = "🇪🇺💬",
      initial_sidebar_state = 'collapsed',
      menu_items = {
           'About': 'https://www.linkedin.com/in/nicolo-pedrani/',
@@ -19,14 +18,6 @@ from utils import *
 st.session_state.setdefault("messages", [])
 
 set_keys()
-
-# Embed Online Resources
-# bot.add("https://en.wikipedia.org/wiki/Immigration_to_Europe")
-# bot.add("https://www.europarl.europa.eu/factsheets/en/sheet/152/immigration-policy")
-# bot.add("https://www.youtube.com/watch?v=uQqmRkhuMWU")
-# bot.add("https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:52015DC0240")
-# bot.add("https://www.europarl.europa.eu/news/en/headlines/society/20170629STO78629/the-eu-response-to-migration-and-asylum")
-# bot.add("https://www.europarl.europa.eu/news/en/headlines/world/20200624STO81906/exploring-migration-causes-why-people-migrate")
 
 bot = load_bot()
 
